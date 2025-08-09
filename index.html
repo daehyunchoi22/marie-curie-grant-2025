@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowSwarm: Interactive Marie Curie Grant Visualization</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            background: rgba(255,255,255,0.95);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-left-color: #e74c3c;
+            transform: scale(1.02);
+        }
+        
+        .card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .timeline-container {
+            height: 400px;
+            margin: 1rem 0;
+        }
+        
+        .network-container {
+            height: 500px;
+            margin: 1rem 0;
+        }
+        
+        .impact-viz {
+            height: 400px;
+            margin: 1rem 0;
+        }
+        
+        .phase-tab {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            background: #3498db;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .phase-tab:hover, .phase-tab.active {
+            background: #e74c3c;
+            transform: scale(1.05);
+        }
+        
+        .phase-content {
+            display: none;
+            margin-top: 1rem;
+        }
+        
+        .phase-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            margin: 0.5rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .innovation-item {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .innovation-item:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .github-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        
+        .github-link:hover {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://github.com/daehyunchoi22/flowswarm-visualization" class="github-link">View on GitHub</a>
+    
+    <div class="header">
+        <h1>FlowSwarm</h1>
+        <p class="subtitle">Understanding Collective Animal Behavior in Complex Flow Fields</p>
+        <p style="color: #95a5a6;">Marie Skłodowska-Curie Individual Fellowship Proposal</p>
+    </div>
+
+    <div class="container">
+        <!-- Overview Section -->
+        <div class="section">
+            <h2>Project Overview</h2>
+            <div class="grid">
+                <div class="metric">
+                    <div class="metric-value">€207,312</div>
+                    <div class="metric-label">Total Budget</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">Months Duration</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">Research Phases</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">4</div>
+                    <div class="metric-label">Work Packages</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Timeline -->
+        <div class="section">
+            <h2>Project Timeline</h2>
+            <div class="timeline-container" id="timeline"></div>
+        </div>
+
+        <!-- Research Phases -->
+        <div class="section">
+            <h2>Research Phases</h2>
+            <div>
+                <div class="phase-tab active" onclick="showPhase('phase1')">Phase 1: Theory</div>
+                <div class="phase-tab" onclick="showPhase('phase2')">Phase 2: VR Lab</div>
+                <div class="phase-tab" onclick="showPhase('phase3')">Phase 3: Bio-Robotics</div>
+            </div>
+            
+            <div class="phase-content active" id="phase1">
+                <div class="grid">
+                    <div class="card">
+                        <h3>Vicsek Model Extension</h3>
+                        <p>Extend classical collective behavior models to include flow field interactions and multi-sensory integration.</p>
+                        <ul>
+                            <li>Flow gradient analysis</li>
+                            <li>Turbulence effects modeling</li>
+                            <li>Large-scale current integration</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Cognitive Integration</h3>
+                        <p>Build on Sayin et al. (2025) findings to create flow-aware decision-making models.</p>
+                        <ul>
+                            <li>Visual-flow information fusion</li>
+                            <li>Probabilistic decision frameworks</li>
+                            <li>Multi-scale temporal dynamics</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase2">
+                <div class="grid">
+                    <div class="card">
+                        <h3>VR System Design</h3>
+                        <p>Create immersive virtual reality environment for collective behavior experiments.</p>
+                        <ul>
+                            <li>Multi-agent interaction protocols</li>
+                            <li>Real-time flow visualization</li>
+                            <li>Haptic feedback integration</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Flow Laboratory</h3>
+                        <p>Validate virtual experiments with physical flow measurements.</p>
+                        <ul>
+                            <li>Particle tracking velocimetry</li>
+                            <li>Wind/water tunnel validation</li>
+                            <li>Sensor calibration protocols</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase-content" id="phase3">
+                <div class="grid">
+                    <div class="card">
+                        <h3>Mudskipper-Inspired Swarms</h3>
+                        <p>Develop amphibious robotic swarms based on bio-inspired locomotion principles.</p>
+                        <ul>
+                            <li>Air-water transition mechanisms</li>
+                            <li>Distributed coordination algorithms</li>
+                            <li>Environmental adaptation</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Flow-Sensing Networks</h3>
+                        <p>Implement flow-aware collective intelligence in robotic systems.</p>
+                        <ul>
+                            <li>Pressure array sensors</li>
+                            <li>Accelerometer integration</li>
+                            <li>Real-time swarm coordination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Innovation Mapping -->
+        <div class="section">
+            <h2>Key Innovations</h2>
+            <div class="innovation-grid">
+                <div class="innovation-item">
+                    <h3>🧠</h3>
+                    <h4>Cognitive Flow Models</h4>
+                    <p>First integration of flow sensing with cognitive decision-making in collective behavior</p>
+                </div>
+                <div class="innovation-item">
+                    <h3>🥽</h3>
+                    <h4>Immersive VR Methods</h4>
+                    <p>Novel VR-flow laboratory for multi-sensory collective behavior experiments</p>
+                </div>
+                <div class="innovation-item">
+                    <h3>🤖</h3>
+                    <h4>Bio-Inspired Validation</h4>
+                    <p>Amphibious robotic swarms for real-world testing of theoretical predictions</p>
+                </div>
+                <div class="innovation-item">
+                    <h3>🌊</h3>
+                    <h4>Multi-Scale Flow Integration</h4>
+                    <p>Linking individual flow sensing to emergent group patterns</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impact Visualization -->
+        <div class="section">
+            <h2>Expected Impact</h2>
+            <div class="impact-viz" id="impact"></div>
+        </div>
+
+        <!-- Network Diagram -->
+        <div class="section">
+            <h2>Research Integration Network</h2>
+            <div class="network-container" id="network"></div>
+        </div>
+
+        <!-- Budget Breakdown -->
+        <div class="section">
+            <h2>Budget Allocation</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Personnel (65%)</h3>
+                    <div class="metric-value">€134,753</div>
+                    <p>Researcher salary and contributions</p>
+                </div>
+                <div class="card">
+                    <h3>Equipment (20%)</h3>
+                    <div class="metric-value">€41,462</div>
+                    <p>VR system, sensors, robotics components</p>
+                </div>
+                <div class="card">
+                    <h3>Travel & Training (10%)</h3>
+                    <div class="metric-value">€20,731</div>
+                    <p>Conferences, collaboration visits</p>
+                </div>
+                <div class="card">
+                    <h3>Consumables (5%)</h3>
+                    <div class="metric-value">€10,366</div>
+                    <p>Materials, computational resources</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Timeline Chart
+        const timelineData = [{
+            x: ['2025-01', '2025-04', '2025-07', '2025-11', '2026-01', '2026-05', '2026-07', '2026-11'],
+            y: ['WP1: Theory', 'WP1: Theory', 'WP2: Setup', 'WP2: Setup', 'WP3: Data', 'WP3: Data', 'WP4: Analysis', 'WP4: Analysis'],
+            mode: 'markers+lines',
+            marker: { size: 12, color: ['#3498db', '#3498db', '#e74c3c', '#e74c3c', '#2ecc71', '#2ecc71', '#f39c12', '#f39c12'] },
+            line: { color: '#95a5a6', width: 3 },
+            name: 'Project Timeline'
+        }];
+
+        const timelineLayout = {
+            title: 'FlowSwarm 24-Month Development Timeline',
+            xaxis: { title: 'Time' },
+            yaxis: { title: 'Work Packages' },
+            margin: { l: 120 }
+        };
+
+        Plotly.newPlot('timeline', timelineData, timelineLayout);
+
+        // Impact Sunburst Chart
+        const impactData = [{
+            type: "sunburst",
+            labels: ["FlowSwarm Impact", "Scientific", "Technological", "Societal", 
+                     "Fundamental Understanding", "New Paradigms", "Interdisciplinary Bridge",
+                     "VR Technology", "Robotic Systems", "Flow-aware AI",
+                     "Marine Conservation", "Disaster Response", "Autonomous Systems"],
+            parents: ["", "FlowSwarm Impact", "FlowSwarm Impact", "FlowSwarm Impact",
+                      "Scientific", "Scientific", "Scientific",
+                      "Technological", "Technological", "Technological",
+                      "Societal", "Societal", "Societal"],
+            values: [100, 33, 33, 34, 11, 11, 11, 11, 11, 11, 11, 11, 12],
+            outsidetextfont: {size: 20, color: "#377eb8"},
+            leaf: {opacity: 0.4},
+            marker: {line: {width: 2}},
+            branchvalues: "total"
+        }];
+
+        const impactLayout = {
+            title: "Project Impact Areas",
+            margin: {l: 0, r: 0, t: 50, b: 0}
+        };
+
+        Plotly.newPlot('impact', impactData, impactLayout);
+
+        // Research Integration Network (D3.js)
+        const networkData = {
+            nodes: [
+                {id: "FlowSwarm", group: 1, size: 20},
+                {id: "Mudskipper Robots", group: 2, size: 15},
+                {id: "DARPA Projects", group: 2, size: 15},
+                {id: "Air-Water Transitions", group: 2, size: 15},
+                {id: "Sayin et al. 2025", group: 3, size: 12},
+                {id: "Vicsek Model", group: 3, size: 12},
+                {id: "Collective Behavior", group: 3, size: 12},
+                {id: "VR Experiments", group: 4, size: 10},
+                {id: "Bio-inspired Swarms", group: 4, size: 10},
+                {id: "Flow Models", group: 4, size: 10}
+            ],
+            links: [
+                {source: "Mudskipper Robots", target: "FlowSwarm", value: 3},
+                {source: "DARPA Projects", target: "FlowSwarm", value: 3},
+                {source: "Air-Water Transitions", target: "FlowSwarm", value: 3},
+                {source: "Sayin et al. 2025", target: "Flow Models", value: 2},
+                {source: "Vicsek Model", target: "Flow Models", value: 2},
+                {source: "Collective Behavior", target: "VR Experiments", value: 2},
+                {source: "FlowSwarm", target: "VR Experiments", value: 4},
+                {source: "FlowSwarm", target: "Bio-inspired Swarms", value: 4},
+                {source: "FlowSwarm", target: "Flow Models", value: 4}
+            ]
+        };
+
+        const svg = d3.select("#network").append("svg")
+            .attr("width", "100%")
+            .attr("height", "500");
+
+        const width = 800, height = 500;
+
+        const simulation = d3.forceSimulation(networkData.nodes)
+            .force("link", d3.forceLink(networkData.links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(networkData.links)
+            .enter().append("line")
+            .attr("stroke", "#95a5a6")
+            .attr("stroke-width", d => d.value);
+
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(networkData.nodes)
+            .enter().append("circle")
+            .attr("r", d => d.size)
+            .attr("fill", d => d3.schemeCategory10[d.group])
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        const label = svg.append("g")
+            .selectAll("text")
+            .data(networkData.nodes)
+            .enter().append("text")
+            .text(d => d.id)
+            .attr("font-size", "12px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "#2c3e50");
+
+        simulation.on("tick", () => {
+            link.attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node.attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            label.attr("x", d => d.x)
+                .attr("y", d => d.y + 5);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // Phase switching functionality
+        function showPhase(phaseId) {
+            document.querySelectorAll('.phase-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.phase-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(phaseId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
