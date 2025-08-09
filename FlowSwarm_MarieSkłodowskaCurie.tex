@@ -1,0 +1,352 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{cite}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{titlesec}
+
+% Page setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Marie Skłodowska-Curie Individual Fellowship}
+\fancyhead[R]{FlowSwarm Project}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\color{blue!70!black}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Spacing
+\onehalfspacing
+
+% Custom commands
+\newcommand{\proposaltitle}[1]{\textbf{\Large #1}}
+\newcommand{\highlight}[1]{\textbf{\color{blue!70!black} #1}}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+{\huge\bfseries Marie Skłodowska-Curie Actions\\Individual Fellowship\\Call: HORIZON-MSCA-IF-2025\par}
+\vspace{2cm}
+{\Large\proposaltitle{FlowSwarm: Understanding Collective Animal Behavior in Complex Flow Fields through Bio-Inspired Robotics and Immersive Virtual Reality}\par}
+\vspace{1.5cm}
+{\large Project Acronym: \textbf{FlowSwarm}\par}
+\vspace{1cm}
+{\large Duration: 24 months\par}
+{\large Total Budget Request: €207,312\par}
+\vspace{2cm}
+{\large Applicant: [Your Name]\par}
+{\large Host Institution: [Host Institution Name]\par}
+\vspace{2cm}
+{\large Date: \today\par}
+\vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% PART A: SCIENTIFIC EXCELLENCE
+\section{EXCELLENCE}
+
+\subsection{Quality and credibility of the research/innovation action}
+
+\subsubsection{Objectives}
+
+This interdisciplinary project addresses a fundamental gap in collective behavior research: how animals navigate and coordinate in complex fluid environments. While recent work by Sayin et al. (2025)\cite{sayin2025} highlights the importance of visual cues in collective behavior, flow dynamics play an equally crucial role in natural swarms, particularly for fish and birds. FlowSwarm proposes a novel approach combining bio-inspired robotics, advanced flow visualization, and immersive virtual reality to understand how individual sensory processing and group dynamics interact with large-scale flow structures.
+
+The main objectives are:
+\begin{enumerate}[noitemsep]
+\item \highlight{Mechanistic Understanding}: Investigate how individual animals integrate flow sensory information with visual and social cues during collective behavior
+\item \highlight{Multi-Scale Modeling}: Develop computational models linking individual decision-making to emergent group patterns in complex flow fields
+\item \highlight{Bio-Inspired Applications}: Create amphibious robotic swarms capable of coordinating in air-water transition zones
+\end{enumerate}
+
+\subsubsection{Relation to the state-of-the-art and innovation potential}
+
+\highlight{Current State-of-Art Limitations:}
+The classical Vicsek model\cite{vicsek1995} and its variants focus primarily on neighbor-based alignment rules without considering environmental flow effects. Recent cognitive approaches by Sayin et al. (2025)\cite{sayin2025} demonstrate that locusts use probabilistic decision-making based on sensory integration, but these models do not account for flow dynamics that are crucial in aquatic and aerial environments.
+
+\highlight{Innovation Beyond State-of-Art:}
+\begin{itemize}[noitemsep]
+\item \textbf{First integration} of flow dynamics with cognitive models of collective behavior
+\item \textbf{Novel VR methodology} for studying multi-sensory collective decision-making in controlled flow environments
+\item \textbf{Bio-inspired robotic validation} of theoretical predictions using amphibious swarms in real flow conditions
+\item \textbf{Multi-scale framework} connecting individual flow sensing to emergent group coordination patterns
+\end{itemize}
+
+\subsubsection{Methodology}
+
+\highlight{Phase 1: Flow-Integrated Collective Behavior Analysis (Months 1-8)}
+\begin{itemize}[noitemsep]
+\item Extend the Vicsek model framework to include flow field interactions
+\item Develop mathematical models for flow gradient sensing and turbulence response
+\item Analyze how large-scale currents and local flow variations influence swarm cohesion
+\item Compare visual-only models with flow-integrated models using existing datasets
+\end{itemize}
+
+\highlight{Phase 2: Immersive VR Flow Laboratory (Months 6-16)}
+\begin{itemize}[noitemsep]
+\item Design and construct a multi-sensory VR system integrating:
+    \begin{itemize}
+    \item High-resolution flow visualization using particle tracking velocimetry (PTV)
+    \item Haptic feedback systems for flow sensation simulation
+    \item Multi-agent interaction protocols for group behavior studies
+    \end{itemize}
+\item Validate virtual flow fields against physical experiments using wind/water tunnels
+\item Conduct human-subject experiments to understand multi-sensory integration in collective navigation
+\end{itemize}
+
+\highlight{Phase 3: Bio-Inspired Robotic Implementation (Months 12-24)}
+\begin{itemize}[noitemsep]
+\item Develop amphibious robot swarms based on mudskipper locomotion principles
+\item Implement distributed flow-sensing capabilities using pressure sensor arrays and accelerometers
+\item Test collective navigation strategies in controlled air-water environments
+\item Validate theoretical predictions through real-world robotic experiments
+\end{itemize}
+
+\subsection{Quality and appropriateness of the training and of the two-way transfer of knowledge}
+
+\subsubsection{Training Program}
+
+\highlight{Technical Skills Development:}
+\begin{itemize}[noitemsep]
+\item Advanced computational fluid dynamics (CFD) modeling
+\item Virtual reality system development and human-computer interaction
+\item Multi-agent robotics programming and swarm coordination algorithms
+\item Particle tracking velocimetry and flow visualization techniques
+\end{itemize}
+
+\highlight{Transferable Skills:}
+\begin{itemize}[noitemsep]
+\item Project management for interdisciplinary research
+\item Scientific communication and visualization
+\item Grant writing and proposal development
+\item Collaboration with industry partners in robotics and VR
+\end{itemize}
+
+\subsubsection{Two-Way Knowledge Transfer}
+
+\highlight{To Host Institution:}
+\begin{itemize}[noitemsep]
+\item Bio-inspired robotics expertise from mudskipper research and DARPA projects
+\item Air-water transition vehicle design and testing methodologies  
+\item Experimental validation approaches for bio-inspired systems
+\item Novel approaches to collective behavior modeling
+\end{itemize}
+
+\highlight{From Host Institution:}
+\begin{itemize}[noitemsep]
+\item Advanced computational modeling techniques
+\item VR/AR technology development capabilities
+\item Collective intelligence research methodologies
+\item Access to state-of-the-art flow visualization facilities
+\end{itemize}
+
+\subsection{Quality of the supervision and the hosting arrangements}
+
+[Host Institution] provides an ideal environment for this interdisciplinary research with:
+\begin{itemize}[noitemsep]
+\item World-class facilities for computational fluid dynamics and robotics research
+\item Established VR/AR research laboratories with cutting-edge equipment
+\item Strong track record in collective behavior and swarm intelligence research
+\item Active collaborations with marine biology and environmental science departments
+\end{itemize}
+
+The supervision team combines expertise in fluid mechanics, collective behavior, and bio-inspired robotics, ensuring comprehensive guidance across all project phases.
+
+% PART B: IMPACT
+\section{IMPACT}
+
+\subsection{Enhancing research and innovation potential and expected socio-economic and cultural impact}
+
+\subsubsection{Scientific Impact}
+
+\highlight{Fundamental Contributions:}
+\begin{itemize}[noitemsep]
+\item Advance understanding of multi-sensory integration in collective behavior
+\item Establish new experimental paradigms for studying animal groups in fluid environments
+\item Bridge the gap between cognitive neuroscience and fluid mechanics
+\item Provide validated models for flow-aware collective intelligence
+\end{itemize}
+
+\highlight{Expected Publications:}
+\begin{itemize}[noitemsep]
+\item 3-4 high-impact journal articles (Nature/Science family, Current Biology, PNAS)
+\item 2-3 conference presentations at top venues (ICRA, RSS, ALife)
+\item 1 review article on bio-inspired collective behavior in flow fields
+\end{itemize}
+
+\subsubsection{Technological Impact}
+
+\highlight{Innovation Outputs:}
+\begin{itemize}[noitemsep]
+\item VR-flow simulation technology for research and training applications
+\item Amphibious robotic swarm platforms for environmental monitoring
+\item Flow-aware autonomous vehicle coordination algorithms
+\item Novel sensor integration approaches for multi-modal environmental sensing
+\end{itemize}
+
+\highlight{Commercialization Potential:}
+Expected 1-2 patent applications for key technological innovations, with potential licensing opportunities in robotics and VR industries.
+
+\subsubsection{Societal Impact}
+
+\highlight{Environmental Applications:}
+\begin{itemize}[noitemsep]
+\item Marine conservation through improved understanding of fish schooling behavior
+\item Enhanced monitoring capabilities for coral reef ecosystems
+\item Better prediction models for marine animal migration patterns
+\end{itemize}
+
+\highlight{Safety and Security:}
+\begin{itemize}[noitemsep]
+\item Improved drone swarm coordination in complex weather conditions
+\item Enhanced disaster response capabilities in flood/tsunami scenarios
+\item Advanced search and rescue applications in challenging environments
+\end{itemize}
+
+\subsection{Strengthening human capital in research and innovation}
+
+This fellowship will establish the applicant as a leading researcher in bio-inspired collective intelligence, creating:
+\begin{itemize}[noitemsep]
+\item A unique interdisciplinary research profile combining biology, robotics, and VR
+\item International research networks spanning Europe and beyond
+\item Mentorship opportunities for PhD students and early-career researchers
+\item Industry partnerships for technology transfer and innovation
+\end{itemize}
+
+% PART C: IMPLEMENTATION
+\section{IMPLEMENTATION}
+
+\subsection{Work plan and resources}
+
+\subsubsection{Work Package Structure}
+
+\begin{table}[h]
+\centering
+\caption{Work Package Timeline and Deliverables}
+\begin{tabular}{|p{2cm}|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\textbf{WP} & \textbf{Period} & \textbf{Objectives} & \textbf{Deliverables} \\
+\hline
+WP1: Theory & Months 1-6 & Literature review, model development, VR system design & Theoretical framework, simulation platform \\
+\hline
+WP2: Setup & Months 7-12 & VR laboratory construction, robot development, sensor integration & Functional VR-flow laboratory, robot prototypes \\
+\hline
+WP3: Data & Months 13-18 & VR experiments, robotic testing, flow characterization & Experimental datasets, validated models \\
+\hline
+WP4: Analysis & Months 19-24 & Model validation, cross-validation, publication preparation & Scientific publications, patent applications \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Resource Requirements}
+
+\highlight{Equipment and Infrastructure (€41,462 - 20\%):}
+\begin{itemize}[noitemsep]
+\item VR headsets and haptic feedback systems: €15,000
+\item Robotic components and sensors: €18,000
+\item Flow visualization equipment: €8,462
+\end{itemize}
+
+\highlight{Personnel Costs (€134,753 - 65\%):}
+\begin{itemize}[noitemsep]
+\item Researcher salary (24 months): €96,000
+\item Social security and benefits: €38,753
+\end{itemize}
+
+\highlight{Travel and Training (€20,731 - 10\%):}
+\begin{itemize}[noitemsep]
+\item Conference attendance (4 conferences): €12,000
+\item Collaboration visits and training: €8,731
+\end{itemize}
+
+\highlight{Consumables and Overheads (€10,366 - 5\%):}
+\begin{itemize}[noitemsep]
+\item Computing resources and cloud services: €6,000
+\item Materials and consumables: €4,366
+\end{itemize}
+
+\subsection{Risk management}
+
+\begin{table}[h]
+\centering
+\caption{Risk Assessment and Mitigation Strategies}
+\begin{tabular}{|p{3cm}|p{2cm}|p{5cm}|p{4cm}|}
+\hline
+\textbf{Risk} & \textbf{Impact} & \textbf{Probability} & \textbf{Mitigation Strategy} \\
+\hline
+VR-flow integration complexity & High & Medium & Phased development with fallback to simplified models \\
+\hline
+Equipment delivery delays & Medium & Medium & Early procurement, backup suppliers identified \\
+\hline
+Animal behavior validation challenges & Medium & Low & Multi-species approach, collaboration with biology labs \\
+\hline
+Technical integration difficulties & High & Low & Modular system design, expert consultations \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Appropriateness of the management structure and procedures}
+
+The project management follows established best practices:
+\begin{itemize}[noitemsep]
+\item Monthly progress reviews with supervisor
+\item Quarterly steering committee meetings with all stakeholders
+\item Annual external advisory board assessment
+\item Continuous risk monitoring and mitigation protocols
+\end{itemize}
+
+\section{CONCLUSION}
+
+FlowSwarm represents a groundbreaking approach to understanding collective behavior by integrating flow dynamics, cognitive modeling, and bio-inspired robotics. This Marie Skłodowska-Curie fellowship will establish new research directions at the intersection of biology, engineering, and computer science, with significant implications for environmental monitoring, autonomous systems, and our fundamental understanding of animal behavior.
+
+The project leverages cutting-edge technologies (VR, robotics, AI) to address fundamental scientific questions while creating practical applications for society. The comprehensive training program and international collaboration opportunities will position the applicant as a leader in this emerging field, contributing to European excellence in research and innovation.
+
+% Bibliography
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+
+\bibitem{sayin2025}
+Sayin, S., Couzin-Fuchs, E., Petelski, I., Günzel, Y., Salahshour, M., Lee, C.Y., Graving, J.M., Li, L., Deussen, O., Sword, G.A., and Couzin, I.D.
+\newblock Collective behavior emerges from genetically controlled simple behavioral rules.
+\newblock \emph{Science}, 387(6028):eadh0154, 2025.
+
+\bibitem{vicsek1995}
+Vicsek, T., Czirók, A., Ben-Jacob, E., Cohen, I., and Shochet, O.
+\newblock Novel type of phase transition in a system of self-driven particles.
+\newblock \emph{Physical Review Letters}, 75(6):1226--1229, 1995.
+
+\bibitem{reynolds1987}
+Reynolds, C.W.
+\newblock Flocks, herds and schools: A distributed behavioral model.
+\newblock \emph{ACM SIGGRAPH Computer Graphics}, 21(4):25--34, 1987.
+
+\bibitem{couzin2002}
+Couzin, I.D., Krause, J., James, R., Ruxton, G.D., and Franks, N.R.
+\newblock Collective memory and spatial sorting in animal groups.
+\newblock \emph{Journal of Theoretical Biology}, 218(1):1--11, 2002.
+
+\bibitem{kovac2018}
+Kovac, M.
+\newblock The bioinspiration design paradigm: a perspective for soft robotics.
+\newblock \emph{Soft Robotics}, 1(1):28--37, 2014.
+
+\end{thebibliography}
+
+\end{document}
